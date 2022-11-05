@@ -12,13 +12,11 @@ public interface BreweryDao {
 
     Brewery findByBreweryName(String breweryName);
 
-    int findIdByBreweryName(String BreweryName);
+    boolean createBrewery(Brewery brewery);
 
-    boolean create(int breweryId, String breweryName, int ownerId, String breweryImg, String description, boolean isActive);
+    boolean deleteBrewery(Brewery brewery);
 
-    boolean delete(int breweryId);
-
-    boolean update(Brewery brewery);
+    boolean updateBrewery(Brewery brewery);
 
 
 }
