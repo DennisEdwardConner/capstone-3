@@ -1,22 +1,30 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Beer {
 
     private int beerId;
+    @NotNull
     private int breweryId;
-    private String name;
+    @NotNull
+    private String beerName;
+    @NotNull
     private String beerImg;
+    @NotNull
     private String description;
-    private long abv;
+    private double abv;
+    @NotNull
     private String beerType;
+    @NotNull
     private boolean isActive;
 
     public Beer() {}
 
-    public Beer(int beerId, int breweryId, String name, String beerImg, String description, long abv, String beerType, boolean isActive) {
+    public Beer(int beerId, int breweryId, String beerName, String beerImg, String description, double abv, String beerType, boolean isActive) {
         this.beerId = beerId;
         this.breweryId = breweryId;
-        this.name = name;
+        this.beerName = beerName;
         this.beerImg = beerImg;
         this.description = description;
         this.abv = abv;
@@ -32,8 +40,8 @@ public class Beer {
         return breweryId;
     }
 
-    public String getName() {
-        return name;
+    public String getBeerName() {
+        return beerName;
     }
 
     public String getBeerImg() {
@@ -44,7 +52,7 @@ public class Beer {
         return description;
     }
 
-    public long getAbv() {
+    public double getAbv() {
         return abv;
     }
 
@@ -64,8 +72,8 @@ public class Beer {
         this.breweryId = breweryId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBeerName(String beerName) {
+        this.beerName = beerName;
     }
 
     public void setBeerImg(String beerImg) {
@@ -76,7 +84,7 @@ public class Beer {
         this.description = description;
     }
 
-    public void setAbv(long abv) {
+    public void setAbv(double abv) {
         this.abv = abv;
     }
 
@@ -95,7 +103,7 @@ public class Beer {
         return "Beer{" +
                 "beerId=" + beerId +
                 ", breweryId=" + breweryId +
-                ", name='" + name + '\'' +
+                ", beerName='" + beerName + '\'' +
                 ", beerImg='" + beerImg + '\'' +
                 ", description='" + description + '\'' +
                 ", abv=" + abv +

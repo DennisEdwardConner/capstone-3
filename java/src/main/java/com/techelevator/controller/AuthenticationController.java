@@ -21,6 +21,9 @@ import com.techelevator.model.UserAlreadyExistsException;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
+/**
+ * Controller to authenticate users.
+ */
 @RestController
 @CrossOrigin
 public class AuthenticationController {

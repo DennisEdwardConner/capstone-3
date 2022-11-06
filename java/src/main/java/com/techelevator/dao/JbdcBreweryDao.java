@@ -1,10 +1,10 @@
 package com.techelevator.dao;
 
-import java.util.List;
-
 import com.techelevator.model.Brewery;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class JbdcBreweryDao implements BreweryDao {
