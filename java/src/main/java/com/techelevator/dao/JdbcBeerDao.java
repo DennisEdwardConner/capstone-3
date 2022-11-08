@@ -108,7 +108,7 @@ public class JdbcBeerDao implements BeerDao {
         int breweryId = beer.getBreweryId();
         boolean isActive = beer.isActive();
 
-        String sql = "UPDATE transfer SET beer_name = ?, beer_img = ?, description = ?, abv = ?, beer_type = ?, brewery_id =?, is_active = ?" +
+        String sql = "UPDATE beers SET beer_name = ?, beer_img = ?, description = ?, abv = ?, beer_type = ?, brewery_id =?, is_active = ?" +
                 "WHERE beer_id = ?";
         try {
             jdbcTemplate.update(sql, beerName, beerImg, description, abv, beerType, breweryId, isActive, beerId);

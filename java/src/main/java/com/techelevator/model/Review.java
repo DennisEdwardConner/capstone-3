@@ -1,11 +1,12 @@
 package com.techelevator.model;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Review {
 
-    @NotNull
+
     private int reviewId;
     @NotNull
     private int userId;
@@ -13,24 +14,20 @@ public class Review {
     private int beerId;
     @NotNull
     private int rating;
+    @NotNull
     private String review;
-    //annotation here?  (DEFAULT NOW)
     private LocalDate createDate;
 
     public Review() {}
 
-    public Review(int userId, int beerId, int rating, String review, LocalDate createDate) {
-        this.userId = userId;
+    public Review(int beerId, int rating, String review, LocalDate createDate) {
         this.beerId = beerId;
         this.rating = rating;
         this.review = review;
         this.createDate = createDate;
     }
 
-    public int getReviewId() {
-        return reviewId;
-    }
-
+    public int getReviewId (){return reviewId;}
     public void setReviewId(int reviewId) {
         this.reviewId = reviewId;
     }

@@ -39,7 +39,7 @@ public class JdbcBreweryDao implements BreweryDao {
         if(results.next()) {
             return mapRowToBrewery(results);
         } else {
-            throw new RuntimeException("brewery ID "+breweryId+" was not found.");
+            throw new RuntimeException("brewery ID " + breweryId + " was not found.");
         }
     }
 
@@ -60,8 +60,6 @@ public class JdbcBreweryDao implements BreweryDao {
     @Override
     public boolean createBrewery(Brewery brewery) {
 
-
-        int breweryId = brewery.getBreweryId();
         String breweryName = brewery.getBreweryName();
         int ownerId = brewery.getBreweryId();
         String breweryImg = brewery.getBreweryImg();
@@ -69,13 +67,11 @@ public class JdbcBreweryDao implements BreweryDao {
         boolean isActive = brewery.getIsActive();
 
         // create brewery
-        // Likely won't need to pass in the brewery_id; Front-end won't know this when creating an object
-        // and the database will auto-generate this.
         try {
             String sql = "INSERT into breweries " +
-                    "(brewery_id, brewery_name, owner_id, brewery_img, description, isActive) " +
-                    "VALUES(?, ?, ?, ?, ?, ?); ";
-            jdbcTemplate.update(sql, breweryId, breweryName, ownerId, breweryImg, description, isActive);
+                    "(brewery_name, owner_id, brewery_img, description, isActive) " +
+                    "VALUES( ?, ?, ?, ?, ?); ";
+            jdbcTemplate.update(sql, breweryName, ownerId, breweryImg, description, isActive);
             return true;
         }
         catch(DataAccessException e) {
@@ -112,7 +108,7 @@ public class JdbcBreweryDao implements BreweryDao {
         String description = brewery.getDescription();
         boolean isActive = brewery.getIsActive();
 
-        String sql = "UPDATE transfer SET brewery_name = ?, owner_id = ?, brewery_img = ?, description = ?, isActive = ? " +
+        String sql = "UPDATE brewery SET brewery_name = ?, owner_id = ?, brewery_img = ?, description = ?, isActive = ? " +
                 "WHERE brewery_id = ?; ";
         try {
             jdbcTemplate.update(sql,breweryName, ownerId, breweryImg, description, isActive, breweryId);
