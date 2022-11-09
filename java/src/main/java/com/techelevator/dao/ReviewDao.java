@@ -21,5 +21,7 @@ public interface ReviewDao {
 
     double getAverage(List<Integer> ratings);
 
+    double getAverageRating(int beerId);
+
 
 }

@@ -85,7 +85,7 @@ public class JdbcBreweryDao implements BreweryDao {
     @Override
     public boolean deleteBrewery(Brewery brewery) {
         int breweryId = brewery.getBreweryId();
-        String sql = "DELETE brewery FROM breweries WHERE brewery_id = ?";
+        String sql = "DELETE FROM breweries WHERE brewery_id = ?";
         try{
             jdbcTemplate.update(sql, breweryId);
             return true;
@@ -108,7 +108,7 @@ public class JdbcBreweryDao implements BreweryDao {
         String description = brewery.getDescription();
         boolean isActive = brewery.getIsActive();
 
-        String sql = "UPDATE brewery SET brewery_name = ?, owner_id = ?, brewery_img = ?, description = ?, isActive = ? " +
+        String sql = "UPDATE breweries SET brewery_name = ?, owner_id = ?, brewery_img = ?, description = ?, isActive = ? " +
                 "WHERE brewery_id = ?; ";
         try {
             jdbcTemplate.update(sql,breweryName, ownerId, breweryImg, description, isActive, breweryId);

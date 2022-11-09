@@ -59,7 +59,6 @@ public class JdbcBeerDao implements BeerDao {
 
     @Override
     public boolean createBeer(Beer beer) {
-        int beerId = beer.getBeerId();
         String beerName = beer.getBeerName();
         String beerImg = beer.getBeerImg();
         String description = beer.getDescription();
@@ -70,9 +69,9 @@ public class JdbcBeerDao implements BeerDao {
 
         try {
             String sql = "INSERT into beers " +
-                    "(beer_id, beer_name, beer_img, description, abv, beer_type, brewery_id, is_active) " +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            jdbcTemplate.update(sql, beerId, beerName, beerImg, description, abv, beerType, breweryId, isActive);
+                    "(beer_name, beer_img, description, abv, beer_type, brewery_id, is_active) " +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql, beerName, beerImg, description, abv, beerType, breweryId, isActive);
             return true;
         }
         catch(DataAccessException e) {
@@ -85,7 +84,7 @@ public class JdbcBeerDao implements BeerDao {
     @Override
     public boolean deleteBeer(Beer beer) {
         int beerId = beer.getBeerId();
-        String sql = "DELETE beer FROM beers WHERE beer_id = ?";
+        String sql = "DELETE FROM beers WHERE beer_id = ?";
         try {
             jdbcTemplate.update(sql, beerId);
             return true;

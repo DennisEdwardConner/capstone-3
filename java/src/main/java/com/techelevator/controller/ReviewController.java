@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin
 @PreAuthorize("isAuthenticated()")
 public class ReviewController {
 
@@ -18,18 +19,26 @@ public class ReviewController {
 
     public ReviewController(ReviewDao reviewDao) {this.reviewDao = reviewDao;}
 
+
     @GetMapping(path="/beer/reviews/{id}")
     public List<Review> getReviewsByBeerId(@PathVariable int id) {
         return reviewDao.getReviewsByBeerId(id); }
+
     @GetMapping(path="/beer/ratings/{id}")
     public List<Review> getRatingsByBeerId(@PathVariable int id) {
         return reviewDao.getReviewsByBeerId(id); }
+
+    @GetMapping(path="/beer/ratings/average/{id}")
+    public double getAverageRating(@PathVariable int id) {
+        return reviewDao.getAverageRating(id);
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path="/review/create")
     public boolean createReview(@RequestBody Review review) {
         return reviewDao.createReview(review);
     }
+
     @PutMapping(path="/review/update")
     public boolean updateReview(@RequestBody Review review) {
         return reviewDao.updateReview(review);

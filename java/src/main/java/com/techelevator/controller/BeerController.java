@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @PreAuthorize("isAuthenticated()")
-@RequestMapping(path = "/techelevator")  //?
 public class BeerController {
 
     private BeerDao beerDao;
@@ -32,7 +32,7 @@ public class BeerController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(path="/brewery/create")
+    @PostMapping(path="/beer/create")
     public boolean createBeer(@RequestBody Beer beer) {
         return beerDao.createBeer(beer);
     }

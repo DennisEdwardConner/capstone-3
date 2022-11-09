@@ -72,7 +72,7 @@ public class JdbcReviewDao implements ReviewDao {
         try {
 
             String sql = "INSERT into reviews " +
-                    "(user_id, beer_id, rating, review_text, create_date) " +
+                    "(user_id, beer_id, rating, review, create_date) " +
                     "VALUES( ?, ?, ?, ?, ?); ";
             jdbcTemplate.update(sql, userId, beerId, rating, reviewText, createDate);
             return true;
@@ -93,7 +93,7 @@ public class JdbcReviewDao implements ReviewDao {
         LocalDate createDate = review.getCreateDate();
 
         String sql = "UPDATE reviews " +
-                "SET (user_id = ?, beer_id = ?, rating = ?, review_text = ?, create_date = ?) " +
+                "SET (user_id = ?, beer_id = ?, rating = ?, review = ?, create_date = ?) " +
                 "WHERE review_id = ?;";
         try{
         jdbcTemplate.update(sql, userId, beerId, rating, reviewText, createDate, reviewId);
@@ -128,13 +128,25 @@ public class JdbcReviewDao implements ReviewDao {
         return (double)(sum /(ratings.size()));
     }
 
+    @Override
+    public double getAverageRating(int beerId) {
+        String sql = "SELECT AVG(rating) FROM reviews WHERE beer_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        if (results.next()) {
+            return results.getDouble("avg");
+        }
+        else {
+            throw new RuntimeException("No ratings found for beer ID " + beerId);
+        }
+    }
+
     private Review mapRowToReview(SqlRowSet rs) {
         Review review = new Review();
         review.setReviewId(rs.getInt("review_id"));
         review.setUserId(rs.getInt("user_id"));
         review.setBeerId(rs.getInt("beer_id"));
         review.setRating(rs.getInt("rating"));
-        review.setReview(rs.getString("review_text"));
+        review.setReview(rs.getString("review"));
         review.setCreateDate(rs.getObject("create_date", LocalDate.class));
         return review;
     }
