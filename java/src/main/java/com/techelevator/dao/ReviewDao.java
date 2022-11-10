@@ -11,7 +11,7 @@ public interface ReviewDao {
 
     Review getReviewById(int reviewId);
 
-    List <Review> getReviewsByUserId(int UserId);
+    List<Review> getReviewsByUserId(int UserId);
 
     boolean createReview(Review review);
 

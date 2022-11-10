@@ -26,10 +26,11 @@ public class JdbcReviewDao implements ReviewDao {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, beerId);
         while(results.next()) {
             Review review = mapRowToReview(results);
-            reviews.add((review));
+            reviews.add(review);
         }
         return reviews;
     }
+
     @Override
     public List<Integer> getRatingsByBeerId(int beerId) {
         List<Integer> ratings = new ArrayList<>();
@@ -68,13 +69,10 @@ public class JdbcReviewDao implements ReviewDao {
         int beerId = review.getBeerId();
         int rating = review.getRating();
         String reviewText = review.getReview();
-        LocalDate createDate = review.getCreateDate();
-        try {
 
-            String sql = "INSERT into reviews " +
-                    "(user_id, beer_id, rating, review, create_date) " +
-                    "VALUES( ?, ?, ?, ?, ?); ";
-            jdbcTemplate.update(sql, userId, beerId, rating, reviewText, createDate);
+        try {
+            String sql = "INSERT into reviews (user_id, beer_id, rating, review) VALUES(?, ?, ?, ?); ";
+            jdbcTemplate.update(sql, userId, beerId, rating, reviewText);
             return true;
         }
         catch(DataAccessException e) {
@@ -90,13 +88,11 @@ public class JdbcReviewDao implements ReviewDao {
         int beerId = review.getBeerId();
         int rating = review.getRating();
         String reviewText = review.getReview();
-        LocalDate createDate = review.getCreateDate();
 
-        String sql = "UPDATE reviews " +
-                "SET (user_id = ?, beer_id = ?, rating = ?, review = ?, create_date = ?) " +
+        String sql = "UPDATE reviews SET user_id = ?, beer_id = ?, rating = ?, review = ? " +
                 "WHERE review_id = ?;";
         try{
-        jdbcTemplate.update(sql, userId, beerId, rating, reviewText, createDate, reviewId);
+        jdbcTemplate.update(sql, userId, beerId, rating, reviewText, reviewId);
         return true;
         }
         catch(DataAccessException e){
@@ -130,14 +126,20 @@ public class JdbcReviewDao implements ReviewDao {
 
     @Override
     public double getAverageRating(int beerId) {
-        String sql = "SELECT AVG(rating) FROM reviews WHERE beer_id = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        if (results.next()) {
-            return results.getDouble("avg");
+        try {
+            return jdbcTemplate.queryForObject("SELECT AVG(rating) FROM reviews WHERE beer_id = ?;", double.class, beerId);
         }
-        else {
+        catch(Exception e) {
             throw new RuntimeException("No ratings found for beer ID " + beerId);
         }
+//        String sql = "SELECT AVG(rating) FROM reviews WHERE beer_id = ?;";
+//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+//        if (results.next()) {
+//            return results.getDouble("avg");
+//        }
+//        else {
+//            throw new RuntimeException("No ratings found for beer ID " + beerId);
+//        }
     }
 
     private Review mapRowToReview(SqlRowSet rs) {
@@ -147,7 +149,7 @@ public class JdbcReviewDao implements ReviewDao {
         review.setBeerId(rs.getInt("beer_id"));
         review.setRating(rs.getInt("rating"));
         review.setReview(rs.getString("review"));
-        review.setCreateDate(rs.getObject("create_date", LocalDate.class));
+        review.setCreateDate(rs.getDate("create_date").toLocalDate());
         return review;
     }
 }

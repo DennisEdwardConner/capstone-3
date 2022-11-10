@@ -25,8 +25,8 @@ public class ReviewController {
         return reviewDao.getReviewsByBeerId(id); }
 
     @GetMapping(path="/beer/ratings/{id}")
-    public List<Review> getRatingsByBeerId(@PathVariable int id) {
-        return reviewDao.getReviewsByBeerId(id); }
+    public List<Integer> getRatingsByBeerId(@PathVariable int id) {
+        return reviewDao.getRatingsByBeerId(id); }
 
     @GetMapping(path="/beer/ratings/average/{id}")
     public double getAverageRating(@PathVariable int id) {

@@ -128,7 +128,7 @@ public class JdbcBreweryDao implements BreweryDao {
         brewery.setOwnerId(rs.getInt("owner_id"));
         brewery.setBreweryImg(rs.getString("brewery_img"));
         brewery.setDescription(rs.getString("description"));
-        brewery.setActive(true);
+        brewery.setActive(rs.getBoolean("is_active"));
 
         return brewery;
     }

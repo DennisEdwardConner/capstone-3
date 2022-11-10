@@ -14,7 +14,6 @@ public class Review {
     private int beerId;
     @NotNull
     private int rating;
-    @NotNull
     private String review;
     private LocalDate createDate;
 
