@@ -25,7 +25,7 @@ function Footer(props) {
                             <i className="fa fa-phone fa-lg"></i>: +605 475 6961<br />
                             <i className="fa fa-fax fa-lg"></i>: +860 867 5309<br />
                             <i className="fa fa-envelope fa-lg"></i>: <Link to="mailto:teamJo@meritamerica.com">
-                                confusion@food.net</Link>
+                            teamJo@meritamerica.com</Link>
                         </address>
                     </div>
                     <div className="col-12 col-sm-4 align-self-center">

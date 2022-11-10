@@ -1,14 +1,14 @@
-import {Component} from 'react'
-import {Switch, Route, Redirect, Link} from 'react-router-dom'
-import Login from '../Login/Login'
-import Register from '../Register/Register'
-import Home from '../Home/Home'
-import {addToken, deleteUser} from '../../Redux/actionCreators'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import {Component} from 'react';
+import {Switch, Route, Redirect, Link} from 'react-router-dom';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Home from '../Home/Home';
+import {addToken, deleteUser} from '../../Redux/actionCreators';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
-import Header from '../Header.js'
-import Footer from '../Footer.js'
+import Header from '../Structure/Header';
+import Footer from '../Structure/Footer';
 
 
 const mapStateToProps = state => {
