@@ -10,7 +10,8 @@ class Register extends Component{
         this.state = {
             username: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            role: ''
         }
         
     }
@@ -67,6 +68,34 @@ class Register extends Component{
                     onChange={this.handleInputChange}
                     required
                 />
+                <input 
+                    type="radio" 
+                    id="beer-lover" 
+                    name="role" 
+                    v-model="user.role"
+                    onChange={this.handleInputChange}
+                    required
+                />
+                <label for="beer-lover">Beer Lover</label>
+                <input 
+                    type="radio" 
+                    id="brewery-owner" 
+                    name="role" 
+                    v-model="user.role"
+                    onChange={this.handleInputChange}
+                    required
+                    />
+                <label for="brewery-owner">Brewery Owner</label>
+                <input 
+                    type="radio" 
+                    id="admin" 
+                    name="role" 
+                    v-model="user.role"
+                    onChange={this.handleInputChange}
+                    required
+                    />
+                <label for="admin">Admin</label>
+                <br></br>
                 <Link to="/login">Have an account?</Link>
                 <button type="submit" onClick={this.handleSubmit}>Sign in</button>
             </div>
