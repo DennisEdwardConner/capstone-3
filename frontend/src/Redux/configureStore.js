@@ -2,9 +2,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import {Token} from './token';
 import {User} from './user';
 import thunk from 'redux-thunk';
-import { Beers } from './beers';
-import { Comments } from './comments';
-import { Breweries } from './breweries';
+import BeerDetail from '../Components/Beer/BeerDetail';
+import Comments from '../Components/Comments';
+//import { Breweries } from '../Components/Breweries';
 
 
 export const ConfigureStore = () => {
@@ -14,9 +14,9 @@ export const ConfigureStore = () => {
         combineReducers({
             token: Token,
             user: User,
-            beers: Beers,
+            beerdetail: BeerDetail,
             comments: Comments,
-            breweries: Breweries,
+            //brewery: Brewery,
             
         }),
         applyMiddleware( thunk )            

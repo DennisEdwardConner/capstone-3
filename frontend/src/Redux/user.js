@@ -1,4 +1,4 @@
-import * as ActionTypes from './actionTypes';
+import * as actionTypes from './actionTypes';
 
 export const User = (state = {
         id: null,
@@ -6,10 +6,10 @@ export const User = (state = {
         authorities: []
     }, action) => {
     switch (action.type) {
-        case ActionTypes.ADD_USER:
+        case actionTypes.ADD_USER:
             return { ...state, id: action.payload.id, username: action.payload.username, authorities: action.payload.authorities }
         
-        case ActionTypes.DELETE_USER:
+        case actionTypes.DELETE_USER:
             return { ...state, id: null, username: '', authorities: [] }
 
         default:

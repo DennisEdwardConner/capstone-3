@@ -1,24 +1,24 @@
-import * as ActionTypes from './ActionTypes';
-import { baseUrl } from '../shared/baseUrl';
+import * as actionTypes from './actionTypes';
+import { baseUrl } from '../Shared/baseUrl';
 
 export const addToken = (token) => ({
-    type: ActionTypes.ADD_TOKEN,
+    type: actionTypes.ADD_TOKEN,
     payload: token
 });
 
 export const addUser = (user) => ({
-    type: ActionTypes.ADD_USER,
+    type: actionTypes.ADD_USER,
     payload: user
 })
 
 export const deleteUser = () => ({
-    type: ActionTypes.DELETE_USER
+    type: actionTypes.DELETE_USER
 })
 
 
 /* Comment function? */
 export const addComment = (comment) => ({
-    type: ActionTypes.ADD_COMMENT,
+    type: actionTypes.ADD_COMMENTS,
     payload: comment
 });
 
@@ -95,16 +95,16 @@ export const fetchBeers = () => (dispatch) => {
 }
 
 export const beersLoading = () => ({
-    type: ActionTypes.BEERS_LOADING
+    type: actionTypes.BEERS_LOADING
 });
 
 export const beersFailed = (errmess) => ({
-    type: ActionTypes.BEERS_FAILED,
+    type: actionTypes.BEERS_FAILED,
     payload: errmess
 });
 
 export const addBeers = (beers) => ({
-    type: ActionTypes.ADD_BEERS,
+    type: actionTypes.ADD_BEERS,
     payload: beers
 });
 
@@ -132,12 +132,12 @@ export const fetchComments = () => (dispatch) => {
 };
 
 export const commentsFailed = (errmess) => ({
-    type: ActionTypes.COMMENTS_FAILED,
+    type: actionTypes.COMMENTS_FAILED,
     payload: errmess
 });
 
 export const addComments = (comments) => ({
-    type: ActionTypes.ADD_COMMENTS,
+    type: actionTypes.ADD_COMMENTS,
     payload: comments
 });
 
@@ -170,15 +170,15 @@ export const fetchBreweries = () => (dispatch) => {
 }
 
 export const breweriesLoading = () => ({
-    type: ActionTypes.BREWERIES_LOADING
+    type: actionTypes.BREWERIES_LOADING
 });
 
 export const breweriesFailed = (errmess) => ({
-    type: ActionTypes.BREWERIES_FAILED,
+    type: actionTypes.BREWERIES_FAILED,
     payload: errmess
 });
 
 export const addBreweries = (breweries) => ({
-    type: ActionTypes.ADD_BREWERIES,
+    type: actionTypes.ADD_BREWERIES,
     payload: breweries
 });

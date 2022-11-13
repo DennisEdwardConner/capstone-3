@@ -1,16 +1,10 @@
 import React from "react";
 import {Card,CardImg,CardText,CardBody,CardTitle,CardSubtitle} from "reactstrap";
-import { baseUrl } from "../shared/baseUrl";
+import { baseUrl } from "../../Shared/baseUrl";
 
-function RenderCard({item, isLoading, errMess }) {
+function RenderCard({item, errMess }) {
 
-    if (isLoading) {
-
-        return (
-            <Loading />
-        );
-    }
-    else if ( errMess ) {
+     if ( errMess ) {
         
         return (
             <h4>{errMess}</h4>
