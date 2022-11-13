@@ -3,16 +3,17 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 
 function RenderCard({item}) {
+    console.log(item, "item == ")
     return(
         <Card>
-            <CardImg src={item.image} alt={item.name}  />
+            <CardImg src={item?.image} alt={item?.name}  />
             
             <CardBody>
-                <CardTitle> {item.name} </CardTitle>
+                <CardTitle> {item?.name} </CardTitle>
 
-                {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
+                {item?.designation ? <CardSubtitle>{item?.designation}</CardSubtitle> : null }
 
-                <CardText>{item.description}</CardText>
+                <CardText>{item?.description}</CardText>
             </CardBody>
 
         </Card>
@@ -22,6 +23,7 @@ function RenderCard({item}) {
 
 
 function Home(props) {
+    console.log(props, "props == ")
     return(
         <div className="container">
             <div className="row align-items-start">
