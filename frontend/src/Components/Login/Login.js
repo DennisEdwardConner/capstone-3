@@ -1,79 +1,81 @@
-import { Component } from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
-import {addToken, addUser} from '../../Redux/actionCreators'
-import {baseUrl} from '../../Shared/baseUrl'
-import axios from 'axios'
+import React,{useState, useContext} from 'react';
+import {GlobalContext, GlobalUpdateContext } from '../../context/globalContext';
+import axios from 'axios';
+import { baseUrl } from '../../Shared/baseUrl'
+import { Link } from 'react-router-dom';
 
 
+const Login = ()=>{
 
-const mapDispatchToProps = (dispatch) => ({
-    addToken: () =>  dispatch(addToken()),
-    addUser: () => dispatch(addUser()) 
-});
 
-class Login extends Component {
-    
-    constructor(props){
-        super(props);
-        this.state = {
-            username: '',
-            password: ''
+    const {setToken,setUserName} =useContext(GlobalUpdateContext)
+
+    const {userName,token} =useContext(GlobalContext)
+    const  [user,setUser]= useState('')
+    const  [userPass,setUserPass]= useState('')
+
+
+    const handleInputChange=(event)=>{
+        event.preventDefault();
+        if(event.target.name==="username"){
+            console.log('user')
+            setUser(event.target.value)
+        }else if(event.target.name==="password"){
+            setUserPass(event.target.value)
+     console.log('pass')
         }
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
-    
-
-    handleLogin = async () => {
-        const data = { username: this.state.username, password: this.state.password };
-        
-
-        const userWithToken = await axios.post(baseUrl + '/login', data)
-
-        
-        await this.props.dispatch(addToken(userWithToken.data.token))
-        await this.props.dispatch(addUser(userWithToken.data.user));
+      
     }
 
-    handleInputChange = (event) => {
-        event.preventDefault()
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+    const submitHandler= async(e)=>{
+        e.preventDefault();
+        const data = {
+     username:user, password:userPass
+        }
+
+        console.log(data,'datta===')
+     const userWithToken= await axios.post(baseUrl+"/login",data)
+     console.log('token====',userWithToken?.data);
+     setToken(userWithToken?.data?.token);
+     setUserName(userWithToken?.data?.user?.username)
     }
 
-    render(){
-        return(
-            <div>
-                <h1>Please Sign In</h1>
-                <label className="sr-only">Username</label>
+
+    return   <>
+     <div style={{margin:'0 auto',width:'50%'}}>
+            <h1 style={{textAlign:'center'}}>{userName}</h1>
+         <form  onSubmit={submitHandler}>
+                <label class="sr-only">Username</label>
                 <input
                     type="text"
                     id="username"
                     name="username"
                     className="form-control"
                     placeholder="Username"
-                    v-model="user.username"
-                    onChange={this.handleInputChange}
+                    onChange={handleInputChange}
                     required
+                    value={user}
                 />
-                <label className="sr-only">Password</label>
+                <label class="sr-only">Password</label>
                 <input
                     type="password"
                     id="password"
                     name="password"
-                    className="form-control"
+                    className='form-control'
                     placeholder="Password"
-                    v-model="user.password"
-                    onChange={this.handleInputChange}
+                    onChange={handleInputChange}
+                    value={userPass}
                     required
                 />
-                <Link to="/register">Need an account?</Link>
-                <button type="submit" onClick={this.handleLogin}>Sign in</button>
-            </div>
-        )
-    }
+                <button onClick={submitHandler} style={{margin:'5px'}}>sign in</button>
+
+
+            </form>
+           
+            <Link style={{textAlign:'center'}} to={'/register'}>Don't have account</Link>
+    </div>
+    </>
+
 }
 
-export default withRouter(connect(mapDispatchToProps)(Login));
+export default Login;

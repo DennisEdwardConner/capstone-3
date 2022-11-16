@@ -11,32 +11,34 @@ import java.util.List;
 
     @RestController
     @CrossOrigin
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
+
     public class BreweryController {
 
         private BreweryDao breweryDao;
 
         public BreweryController(BreweryDao breweryDao) {this.breweryDao = breweryDao;}
 
-        @GetMapping(path="/brewery/all")
+        @RequestMapping(path="/breweries", method = RequestMethod.GET)
         public List<Brewery> getAllBreweries() { return breweryDao.findAll(); }
 
-        @GetMapping(path="/brewery/{id}")
-        public Brewery getBreweryById(@PathVariable int id) { return breweryDao.getBreweryById(id); }
+        @RequestMapping(path="/brewery/{id}", method = RequestMethod.GET)
+        public Brewery getBreweryById(@PathVariable ("id") Integer id) {
+            return breweryDao.getBreweryById(id); }
 
-        @GetMapping(path="/brewery/q={name}")
-        public Brewery findBreweryByName(@PathVariable String name) {
+        @RequestMapping(path="/brewery/{name}", method = RequestMethod.GET)
+        public Brewery findBreweryByName(@PathVariable ("name") String name) {
             return breweryDao.findByBreweryName(name);
         }
 
-        @ResponseStatus(HttpStatus.CREATED)
-        @PostMapping(path="/brewery/create")
+        @RequestMapping(path= "/brewery/create", method = RequestMethod.POST)
+//        @PostMapping(path="/brewery/create")
         public boolean createBrewery(@RequestBody Brewery brewery) {
             return breweryDao.createBrewery(brewery);
         }
 
-        @PutMapping(path="/brewery/{id}")
-        public boolean updateBrewery(@RequestBody Brewery brewery, @PathVariable int id) {
+        @RequestMapping(path="/brewery/{id}", method = RequestMethod.PUT)
+        public boolean updateBrewery(@RequestBody Brewery brewery, @PathVariable ("id") Integer id) {
             return breweryDao.updateBrewery(brewery);
         }
 

@@ -1,26 +1,26 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import {Token} from './token';
-import {User} from './user';
-import thunk from 'redux-thunk';
-import { Beers } from './beers';
-import { Comments } from './comments';
-import { Breweries } from './breweries';
+// import { createStore, combineReducers, applyMiddleware } from 'redux';
+// import {Token} from './token';
+// import {User} from './user';
+// import thunk from 'redux-thunk';
+// // import { Beers } from './beers';
+// import { Comments } from './comments';
+// import { Breweries } from './breweries';
 
 
-export const ConfigureStore = () => {
+// export const ConfigureStore = () => {
 
-    const store = createStore(         
+//     const store = createStore(         
 
-        combineReducers({
-            token: Token,
-            user: User,
-            beers: Beers,
-            comments: Comments,
-            breweries: Breweries,
+//         combineReducers({
+//             token: Token,
+//             user: User,
+//             beers: Beers,
+//             comments: Comments,
+//             breweries: Breweries,
             
-        }),
-        applyMiddleware( thunk )            
-    );
+//         }),
+//         applyMiddleware( thunk )            
+//     );
 
-    return store;
-}
+//     return store;
+// }
