@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem  } from "reactstrap";
 import {Link} from 'react-router-dom';    
-import { baseUrl } from '../shared/baseUrl';
+import { baseUrl } from '../../Shared/baseUrl';
 
     function RenderMenuItem({ beer, onClick }) {
         return(
@@ -16,7 +16,7 @@ import { baseUrl } from '../shared/baseUrl';
         );
     }
 
-    const Menu = (props) => {
+    const BeerMenu = (props) => {
 
         const menu = props.beers.beers.map((beer) => {
             return (
@@ -26,16 +26,7 @@ import { baseUrl } from '../shared/baseUrl';
             );
         });
 
-        if (props.beers.isLoading) {
-            return (
-                <div className="container">
-                    <div className="row">
-                        <Loading />
-                    </div>
-                </div>
-            );
-        }
-        else if (props.beers.errMess) {
+if (props.beers.errMess) {
             return (
                 <div className="container">
                     <div className="row">

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 
 import Home from '../Home/Home';
-import BeerMenu from './BeerMenu';
+import BeerMenu from '../Beer/BeerMenu';
 import Header from '../Structure/Header';
 import Footer from '../Structure/Footer';
-import BeerDetail from './Beerdetail';
+import BeerDetail from '../Beer/BeerDetail';
 
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import {addToken, deleteUser} from '../../Redux/actionCreators';
 
 
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter, Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { postComment, fetchBeers, fetchComments, fetchBreweries } from '../redux/actionCreators';
-import { actions } from 'react-redux-form';
+import { postComment, fetchBeers, fetchComments, fetchBreweries } from '../../Redux/actionCreators';
+import { actions, formReducer } from 'react-redux-form';
 
 
 
@@ -102,10 +102,9 @@ class Main extends Component {
                 <Header></Header>
                 {this.props.token.token !== undefined ?
                         <div>
-                            <Link to='/home'>Home | </Link>
+                            <Link to='/home'>Home </Link>
                             <Link to='/login' onClick={this.handleLogout}>logout</Link> 
                             <Redirect to='/home'/>
-
                         </div>  
                     : 
                         <Link to='/login'>Home | </Link>
@@ -119,7 +118,7 @@ class Main extends Component {
 
                             <Route path="/home" component={ HomePage } />
                             <Route exact path="/beermenu" 
-                                component={() => <Menu beers={this.props.beers}/> }
+                                component={() => <BeerMenu beers={this.props.beers}/> }
                             />
 
                             <Route path="/beermenu/:beerId" component={BeerWithId}  

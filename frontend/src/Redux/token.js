@@ -1,10 +1,10 @@
-import * as ActionTypes from './actionTypes';
+import * as actionTypes from './actionTypes';
 
 export const Token = (state = {
         token: undefined
     }, action) => {
     switch (action.type) {
-        case ActionTypes.ADD_TOKEN:
+        case actionTypes.ADD_TOKEN:
             return { ...state, token: action.payload }
         
         default:
