@@ -54,11 +54,11 @@ class Main extends Component {
         super(props);
     }
 
-    componentDidMount(){
-        this.props.fetchBeers();
-        this.props.fetchComments();
-        this.props.fetchBreweries();
-    }
+    // componentDidMount(){
+    //     this.props.fetchBeers();
+    //     this.props.fetchComments();
+    //     this.props.fetchBreweries();
+    // }
 
     render() {
 
@@ -100,7 +100,7 @@ class Main extends Component {
         return (
             <div>
                 <Header></Header>
-                {this.props.token.token !== undefined ?
+                {/* {this.props.token.token !== undefined ? */}
                         <div>
                             <Link to='/home'>Home </Link>
                             <Link to='/login' onClick={this.handleLogout}>logout</Link> 
@@ -108,12 +108,13 @@ class Main extends Component {
                         </div>  
                     : 
                         <Link to='/login'>Home | </Link>
-                }
+                
 
                         <Switch>
                             <Route path='/login' component={() => <Login/>}/>
                             <Route path='/register'component={() => <Register/>}/>
-                            <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/>
+                            {/* <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/> */}
+                            <Route path='/home' component={() => <Home/>}/>
                             <Redirect to='/login'/>
 
                             <Route path="/home" component={ HomePage } />
@@ -136,4 +137,5 @@ class Main extends Component {
 
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main))
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main))
+export default Main;
