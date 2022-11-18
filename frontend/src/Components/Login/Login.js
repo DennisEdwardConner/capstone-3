@@ -38,8 +38,10 @@ const Login = ()=>{
      console.log('token====',userWithToken?.data);
      setToken(userWithToken?.data?.token);
      setUserName(userWithToken?.data?.user?.username)
+     localStorage.setItem('token',JSON.stringify(token));
+     localStorage.setItem('currentUser',JSON.stringify(userName))
     }
-
+    console.log(token,userName,'token====username')
 
     return   <>
      <div style={{margin:'0 auto',width:'50%'}}>

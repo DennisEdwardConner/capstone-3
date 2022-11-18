@@ -22,7 +22,6 @@ export const GlobalReducer= (state,action)=>{
     }
 }
 
-
 // {
 // id:'',
 // userName:action.payload

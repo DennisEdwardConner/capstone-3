@@ -1,64 +1,37 @@
-import React from "react";
-import {Card,CardImg,CardText,CardBody,CardTitle,CardSubtitle} from "reactstrap";
+import React,{useState,useContext} from "react";
+import { Link } from "react-router-dom";
 import { baseUrl } from "../../Shared/baseUrl";
+import axios from "axios";
+import { GlobalContext } from "../../context/globalContext";
+import { useEffect } from "react";
 
-// function RenderCard({item, errMess }) {
-function RenderCard() {
-
-    //  if ( errMess ) {
-        
-    //     return (
-    //         <h4>{errMess}</h4>
-    //     );
-    // }
-    // else{
-
-        return(
-                <Card>
-                    {/* <CardImg width="100%" src={baseUrl + item?.image} alt={item.name} />                 */}
-                    <CardImg width="100%" src='' alt="" />                
-                    <CardBody>
-                        {/* <CardTitle> {item.name} </CardTitle>
-        
-                        {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
-        
-                        <CardText>{item.description}</CardText> */}
-                    </CardBody>
-        
-                </Card>
-        );
-
+const Home = ()=>{
+//brewery list 
+    const [breweries,setBreweries]=useState([])
+//token from the context
+    const {token} = useContext(GlobalContext)
+ //passing token as header inside the getbrewery/all request and got the data
+    const  getBreweries = async()=>{
+        const res = await axios.get(baseUrl+'/brewery/all',{
+			headers: {
+				'x-access-token': localStorage.getItem('token'),
+			},
+		}
+)
+        // res.then((data)=> {console.log(data);}).catch((err)=>{console.log(err,'===err');})
+//set the data to brewery list
+        setBreweries(res.data)
     }
 
+    // console.log(breweries,'=res====');
 
-
-
-function Home(props) {
-    console.log(props, "props == ")
-    return(
-        <div className="container">
-            <div className="row align-items-start">
-
-                <div className="col-12 col-md m-1">
-                    <RenderCard
-                        item={props.beer}
-                        isLoading={props.beersLoading}
-                        errMess={props.beerErrMess}
-                    />
-                </div>
-
-                <div className="col-12 col-md m-1">
-                    <RenderCard 
-                        item={props.brewery} 
-                        isLoading={props.breweryLoading}
-                        errMess={props.breweryErrMess} 
-
-                    />
-                </div>
-
-            </div>
-        </div>
-    );
+    return <>
+    <h2>I am from home component </h2>
+    <button onClick={getBreweries}>getBreweries</button>
+    <div><h4>Select Brewery</h4>
+        {breweries?.length!==0?<select>{breweries.map((item)=><option key={item.breweryId}>{item.breweryName}</option>)}</select>:""}
+    </div>
+    </>
 }
 
 export default Home;
