@@ -4,6 +4,8 @@ import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
 import { GlobalContext } from "../../context/globalContext";
 import { useEffect } from "react";
+import SqlWriter from "../../Shared/SqlWriter";
+
 
 
 const Card= ({img,title,id,description})=>{
@@ -37,6 +39,7 @@ const Home = ()=>{
     
 
     return <>
+    
     <h2>I am from home component </h2>
     <button onClick={getBreweries}>getBreweries</button>
     <div><h4>Select Brewery</h4>

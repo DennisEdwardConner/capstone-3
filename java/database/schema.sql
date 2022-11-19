@@ -39,6 +39,10 @@ CREATE TABLE breweries (
     brewery_img varchar(50),
     description varchar(200),
     is_active boolean DEFAULT true,
+    address varchar(100)
+    city varchar (50)
+    state varchar (2)
+    zip int (5)
     CONSTRAINT PK_brewery PRIMARY KEY (brewery_id),
     CONSTRAINT FK_brewery_owner FOREIGN KEY (owner_id) REFERENCES users (user_id)
 );
