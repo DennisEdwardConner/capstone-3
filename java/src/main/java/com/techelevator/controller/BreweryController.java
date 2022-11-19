@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.BreweryDao;
+import com.techelevator.model.Beer;
 import com.techelevator.model.Brewery;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,7 +36,10 @@ public class BreweryController {
         return breweryDao.createBrewery(brewery);
     }
 
-    @PutMapping(path="/brewery/{id}")
+    @GetMapping(path="/brewery/all")
+    public List<Beer> findBeersByBreweryId() { return breweryDao.findBeersByBreweryId(); }
+
+    @PutMapping(path="/brewery/beers/{id}")
     public boolean updateBrewery(@RequestBody Brewery brewery, @PathVariable int id) {
         return breweryDao.updateBrewery(brewery);
     }

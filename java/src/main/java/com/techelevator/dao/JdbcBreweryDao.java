@@ -2,6 +2,8 @@ package com.techelevator.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.techelevator.model.Beer;
 import com.techelevator.model.Brewery;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,7 +22,7 @@ public class JdbcBreweryDao implements BreweryDao {
     @Override
     public List<Brewery> findAll() {
         List<Brewery> breweries = new ArrayList<>();
-        String sql = "select * from breweries";
+        String sql = "SELECT * from breweries";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()) {
@@ -55,6 +57,20 @@ public class JdbcBreweryDao implements BreweryDao {
         }
     }
 
+    @Override
+    public List<Beer> findBeersByBreweryId() {
+        List<Beer> beers = new ArrayList<>();
+        String sql = "SELECT * from beers " +
+                "WHERE brewery_id = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Beer beer = mapRowToBeer2(results);
+            beers.add(beer);
+        }
+
+        return beers;
+    }
 
 
     @Override
@@ -66,7 +82,6 @@ public class JdbcBreweryDao implements BreweryDao {
         String description = brewery.getDescription();
         boolean isActive = brewery.getIsActive();
 
-        // create brewery
         try {
             String sql = "INSERT into breweries " +
                     "(brewery_name, owner_id, brewery_img, description, isActive) " +
@@ -131,5 +146,20 @@ public class JdbcBreweryDao implements BreweryDao {
         brewery.setActive(rs.getBoolean("is_active"));
 
         return brewery;
+    }
+
+    //second helper method
+    private Beer mapRowToBeer2(SqlRowSet results) {
+
+        Beer beer = new Beer();
+        beer.setBeerId(results.getInt("beer_id"));
+        beer.setBeerName(results.getString("beer_name"));
+        beer.setBeerImg(results.getString("beer_img"));
+        beer.setDescription(results.getString("description"));
+        beer.setAbv(results.getDouble("abv"));
+        beer.setBeerType(results.getString("beer_type"));
+        beer.setBreweryId(results.getInt("brewery_id"));
+        beer.setActive(results.getBoolean("is_active"));
+        return beer;
     }
 }
