@@ -1,7 +1,10 @@
 package com.techelevator.controller;
 
 
+import com.techelevator.dao.BeerDao;
+import com.techelevator.dao.BreweryDao;
 import com.techelevator.dao.ReviewDao;
+import com.techelevator.dao.UserDao;
 import com.techelevator.model.Review;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,9 +18,19 @@ import java.util.List;
 @PreAuthorize("isAuthenticated()")
 public class ReviewController {
 
+    private UserDao userDao;
+    private BeerDao beerDao;
+    private BreweryDao breweryDao;
     private ReviewDao reviewDao;
 
-    public ReviewController(ReviewDao reviewDao) {this.reviewDao = reviewDao;}
+
+    public ReviewController(UserDao userDao, BeerDao beerDao, BreweryDao breweryDao, ReviewDao reviewDao) {
+        this.userDao = userDao;
+        this.beerDao = beerDao;
+        this.breweryDao = breweryDao;
+        this.reviewDao = reviewDao;
+
+    }
 
 
     @GetMapping(path="/beer/reviews/{id}")

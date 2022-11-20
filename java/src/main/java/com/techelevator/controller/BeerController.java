@@ -16,14 +16,28 @@ import java.util.List;
 @PreAuthorize("isAuthenticated()")
 public class BeerController {
 
+    private UserDao userDao;
     private BeerDao beerDao;
+    private BreweryDao breweryDao;
+    private ReviewDao reviewDao;
 
-    public BeerController(BeerDao beerDao) {this.beerDao = beerDao;}
+
+    public BeerController(UserDao userDao, BeerDao beerDao, BreweryDao breweryDao, ReviewDao reviewDao) {
+        this.userDao = userDao;
+        this.beerDao = beerDao;
+        this.breweryDao = breweryDao;
+        this.reviewDao = reviewDao;
+
+    }
 
     @GetMapping(path="/beer/all")
     public List<Beer> getAllBeers() { return beerDao.findAll(); }
 
-    @GetMapping(path="/beer/{id}")
+    @GetMapping(path="/beers/brewery/{breweryId}")
+    public List<Beer> getAllBeersByBreweryId(int breweryId) { return beerDao.findAll(); }
+
+
+    @GetMapping(path="/beer/{beerId}")
     public Beer findBeerById(@PathVariable int id) { return beerDao.findBeerById(id); }
 
     @GetMapping(path="/beer/q={name}")

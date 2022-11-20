@@ -1,6 +1,9 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.BeerDao;
 import com.techelevator.dao.BreweryDao;
+import com.techelevator.dao.ReviewDao;
+import com.techelevator.dao.UserDao;
 import com.techelevator.model.Beer;
 import com.techelevator.model.Brewery;
 import org.springframework.http.HttpStatus;
@@ -12,12 +15,22 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-//@PreAuthorize("isAuthenticated()")
+@PreAuthorize("isAuthenticated()")
 public class BreweryController {
 
+    private UserDao userDao;
+    private BeerDao beerDao;
     private BreweryDao breweryDao;
+    private ReviewDao reviewDao;
 
-    public BreweryController(BreweryDao breweryDao) {this.breweryDao = breweryDao;}
+
+    public BreweryController(UserDao userDao, BeerDao beerDao, BreweryDao breweryDao, ReviewDao reviewDao) {
+        this.userDao = userDao;
+        this.beerDao = beerDao;
+        this.breweryDao = breweryDao;
+        this.reviewDao = reviewDao;
+
+    }
 
     @GetMapping(path="/brewery/all")
     public List<Brewery> getAllBreweries() { return breweryDao.findAll(); }
@@ -36,8 +49,8 @@ public class BreweryController {
         return breweryDao.createBrewery(brewery);
     }
 
-    @GetMapping(path="/brewery/all")
-    public List<Beer> findBeersByBreweryId() { return breweryDao.findBeersByBreweryId(); }
+//    @GetMapping(path="/brewery/all")
+//    public List<Beer> findBeersByBreweryId() { return breweryDao.findBeersByBreweryId(); }
 
     @PutMapping(path="/brewery/beers/{id}")
     public boolean updateBrewery(@RequestBody Brewery brewery, @PathVariable int id) {
