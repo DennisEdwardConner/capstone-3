@@ -34,7 +34,7 @@ public class BeerController {
     public List<Beer> getAllBeers() { return beerDao.findAll(); }
 
     @GetMapping(path="/beers/brewery/{breweryId}")
-    public List<Beer> getAllBeersByBreweryId(int breweryId) { return beerDao.findAll(); }
+    public List<Beer> getAllBeersByBreweryId(@PathVariable(name = "breweryId") Integer breweryId) { return beerDao.fetchAllBeersByBreweryId(breweryId); }
 
 
     @GetMapping(path="/beer/{beerId}")

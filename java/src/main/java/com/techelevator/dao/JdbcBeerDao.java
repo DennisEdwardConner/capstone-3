@@ -3,6 +3,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Beer;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ public class JdbcBeerDao implements BeerDao {
         String sql = "select * from beers";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        while(results.next()) {
+        while (results.next()) {
             Beer beer = mapRowToBeer(results);
             beers.add(beer);
         }
@@ -34,10 +35,22 @@ public class JdbcBeerDao implements BeerDao {
     }
 
     @Override
+    public List<Beer> fetchAllBeersByBreweryId(int id) {
+        String sql = "SELECT * FROM beers WHERE brewery_id = " + id;
+
+        List<Beer> beers = jdbcTemplate.query(
+                sql,
+                new BeanPropertyRowMapper(Beer.class));
+
+        return beers;
+
+    }
+
+    @Override
     public Beer findBeerById(int beerId) {
         String sql = "SELECT * FROM beers WHERE beer_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, beerId);
-        if(results.next()) {
+        if (results.next()) {
             return mapRowToBeer(results);
         } else {
             throw new RuntimeException("beer ID " + beerId + " was not found.");
@@ -49,7 +62,7 @@ public class JdbcBeerDao implements BeerDao {
     public Beer findBeerByName(String beerName) {
         String sql = "SELECT * FROM beers WHERE beer_name = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, beerName);
-        if(results.next()) {
+        if (results.next()) {
             return mapRowToBeer(results);
         } else {
             throw new RuntimeException("beer name " + beerName + " was not found.");
@@ -73,8 +86,7 @@ public class JdbcBeerDao implements BeerDao {
                     "VALUES(?, ?, ?, ?, ?, ?, ?)";
             jdbcTemplate.update(sql, beerName, beerImg, description, abv, beerType, breweryId, isActive);
             return true;
-        }
-        catch(DataAccessException e) {
+        } catch (DataAccessException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -88,8 +100,7 @@ public class JdbcBeerDao implements BeerDao {
         try {
             jdbcTemplate.update(sql, beerId);
             return true;
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -112,13 +123,11 @@ public class JdbcBeerDao implements BeerDao {
         try {
             jdbcTemplate.update(sql, beerName, beerImg, description, abv, beerType, breweryId, isActive, beerId);
             return true;
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             System.out.println(e.getMessage());
             return false;
         }
     }
-
 
 
     private Beer mapRowToBeer(SqlRowSet results) {
