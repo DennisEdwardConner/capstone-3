@@ -34,9 +34,10 @@ public class JdbcBeerDao implements BeerDao {
         return beers;
     }
 
+    //sql injection?  try ? way and test later, may work now that variable fixed in model
     @Override
-    public List<Beer> fetchAllBeersByBreweryId(int id) {
-        String sql = "SELECT * FROM beers WHERE brewery_id = " + id;
+    public List<Beer> fetchAllBeersByBreweryId(int breweryId) {
+        String sql = "SELECT * FROM beers WHERE brewery_id = " + breweryId;
 
         List<Beer> beers = jdbcTemplate.query(
                 sql,

@@ -6,8 +6,6 @@ public class Beer {
 
     private int beerId;
     @NotNull
-    private int breweryId;
-    @NotNull
     private String beerName;
     @NotNull
     private String beerImg;
@@ -16,6 +14,8 @@ public class Beer {
     private double abv;
     @NotNull
     private String beerType;
+    @NotNull
+    private int breweryId;
     @NotNull
     private boolean isActive;
 

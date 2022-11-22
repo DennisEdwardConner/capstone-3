@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 public class BeerController {
 
     private UserDao userDao;
@@ -34,7 +34,9 @@ public class BeerController {
     public List<Beer> getAllBeers() { return beerDao.findAll(); }
 
     @GetMapping(path="/beers/brewery/{breweryId}")
-    public List<Beer> getAllBeersByBreweryId(@PathVariable(name = "breweryId") Integer breweryId) { return beerDao.fetchAllBeersByBreweryId(breweryId); }
+    public List<Beer>
+    getAllBeersByBreweryId(@PathVariable(name = "breweryId") Integer breweryId) {
+        return beerDao.fetchAllBeersByBreweryId(breweryId); }
 
 
     @GetMapping(path="/beer/{beerId}")

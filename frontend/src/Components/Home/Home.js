@@ -4,8 +4,8 @@ import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
 import { GlobalContext } from "../../context/globalContext";
 import { useEffect } from "react";
-
-
+import SqlWriter from "../../Shared/SqlWriter";
+import BeerCard from "../Beer/BeerCard";
 
 
 
@@ -21,32 +21,46 @@ const Home = ()=>{
 //brewery list 
     const [breweries,setBreweries]=useState([])
     const [brewery,setBrewery]=useState({})
+    const [beers,setBeers]=useState([])
 //token from the context
     const {token} = useContext(GlobalContext)
  //passing token as header inside the getbrewery/all request and got the data
     const  getBreweries = async()=>{
-        const res = await axios.get(baseUrl+'/brewery/all',{
-			headers: {
-				'x-access-token': localStorage.getItem('token'),
-			},
-		}
-)
+        // const res = await axios.get(baseUrl+'/brewery/all',{
+		// 	headers: {
+		// 		'x-access-token':localStorage.getItem('token'),
+		// 	},
+		// }
+// )
+        const res = await  axios.get(baseUrl+'/brewery/all',{
+            headers:{"x-access-token":localStorage.getItem('token')}
+        })
         // res.then((data)=> {console.log(data);}).catch((err)=>{console.log(err,'===err');})
 //set the data to brewery list
-        setBreweries(res.data)
-        console.log(breweries,'=res====');
+         setBreweries(res?.data)
+        console.log(res,'=res====');
+        // console.log(res.data,'=res====');
     }
 
+    const breweryListShow = async(breweryId)=>{
+        const res = await axios.get(baseUrl+"/beers/brewery/" + breweryId,{
+            headers:{"x-access-token":localStorage.getItem('token')}
+        })
+        console.log('res========',res?.data);
+        setBeers([...res?.data])
+    }
     
 
     return <>
-
+    
     <h2>I am from home component </h2>
     <button onClick={getBreweries}>getBreweries</button>
-    <div><h4>Select Brewery</h4>
-        {breweries?.length!==0?<select>{breweries.map((item)=>{ return(<option onClick={()=>{setBrewery(item)}} key={item.breweryId}>{item.breweryName}</option>)})}</select>:""}
-    </div>
-    <div><Card img={brewery?.breweryImg} title={brewery?.breweryName} description={brewery?.description} id={brewery?.breweryId} /></div>
+    <div>
+        {breweries?.length!==0?<select>{breweries.map((item)=>{ return(<option onClick={()=>{setBrewery(item);breweryListShow(+item.breweryId)}} key={item.breweryId}>{item.breweryName}</option>)})}</select>:""}
+    </div><div style={{display:'flex'}}>
+    <div>{breweries?.length!==0?<Card img={brewery?.breweryImg} title={brewery?.breweryName} description={brewery?.description} id={brewery?.breweryId} />:""}</div>
+   <div style={{display:'flex'}}>{beers?.length!==0?beers?.map((item)=><BeerCard abv={item.abv} type={item.beerType} key={item.beerId} imgUrl={item.beerImg} id={item.beerId} description={item.description} title={item.beerName}/>):""}</div>
+   </div>
     </>
 }
 

@@ -42,7 +42,7 @@ CREATE TABLE breweries (
     address varchar(100)
     city varchar (50)
     state varchar (2)
-    zip int (5)
+    zip varchar (10)
     CONSTRAINT PK_brewery PRIMARY KEY (brewery_id),
     CONSTRAINT FK_brewery_owner FOREIGN KEY (owner_id) REFERENCES users (user_id)
 );
@@ -59,7 +59,7 @@ CREATE TABLE beers (
     beer_name varchar(50) NOT NULL,
     beer_img varchar(50) NOT NULL,
     description varchar(200),
-    abv decimal(4, 2) NOT NULL,
+    abv numeric(4, 2) NOT NULL,
     beer_type varchar(20) NOT NULL,
     brewery_id int NOT NULL,
     is_active boolean DEFAULT true,

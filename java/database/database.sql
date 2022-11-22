@@ -5,11 +5,11 @@ VALUES
     (9, 'Gorges', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_BREWER'),
     (10, 'Backwoods', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_BREWER');
 
-INSERT INTO breweries(brewery_id, brewery_name, owner_id, brewery_img, description, is_active)
+INSERT INTO breweries(brewery_id, brewery_name, owner_id, brewery_img, description, is_active, address, city, state, zip)
 VALUES
-    (1001,	'Thunder Island Brewing Company', '8',		'thunder_island.png', 	'a community-focused craft brewery committed to brewing distinctive beers while celebrating diversity, outdoor adventure, and all that the Gorge has to offer.', TRUE),
-    (1002,	'Gorges Beer Co.',	'9',	'gorges.png', 	'With dreams as vast as the Columbia Gorge, our team of brewers and beer enthusiasts came together in 2019 to change the way we drink beer in Cascade Locks. Come join us before or after a hike while you''re out exploring the Gorge!',	TRUE),
-    (1003,	'Backwoods Brewing Company', '10',		'backwoods.png',	'Where the Gifford Pinchot National Forest meets the Carson valley, you will find us busily brewing craft beers from the best ingredients found in the Northwest.',	TRUE);
+    (1001,	'Thunder Island Brewing Company', '8',		'thunder_island.png', 	'a community-focused craft brewery committed to brewing distinctive beers while celebrating diversity, outdoor adventure, and all that the Gorge has to offer.', TRUE, '601 Wa Na Pa St.', 'Cascade Locks', 'OR', '97014'),
+    (1002,	'Gorges Beer Co.',	'9',	'gorges.png', 	'With dreams as vast as the Columbia Gorge, our team of brewers and beer enthusiasts came together in 2019 to change the way we drink beer in Cascade Locks. Come join us before or after a hike while you''re out exploring the Gorge!', TRUE, '390 Wa Na Pa St.', 'Cascade Locks', 'OR', '97014'),
+    (1003,	'Backwoods Brewing Company', '10',		'backwoods.png',	'Where the Gifford Pinchot National Forest meets the Carson valley, you will find us busily brewing craft beers from the best ingredients found in the Northwest.',	TRUE, '1162 Wind River Hwy', 'Carson', 'WA', '98610');
 
 INSERT INTO beers(beer_name, beer_img, description, abv, beer_type, brewery_id, is_active)
 VALUES

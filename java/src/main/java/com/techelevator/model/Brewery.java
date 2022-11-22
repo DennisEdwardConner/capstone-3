@@ -14,16 +14,6 @@ public class Brewery {
 
     public Brewery() {}
 
-    public Brewery(int breweryId, String breweryName, int ownerId, String breweryImg, String description, boolean isActive) {
-        this.breweryId = breweryId;
-        this.breweryName = breweryName;
-        this.ownerId = ownerId;
-        this.breweryImg = breweryImg;
-        this.description = description;
-        this.isActive = isActive;
-
-    }
-
     public Brewery(int breweryId, String breweryName, int ownerId, String breweryImg, String description, boolean isActive, String address, String city, String state, String zip) {
         this.breweryId = breweryId;
         this.breweryName = breweryName;

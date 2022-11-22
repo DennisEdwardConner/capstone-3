@@ -7,7 +7,7 @@ import java.util.List;
 public interface BeerDao {
 
     List<Beer> findAll();
-    List<Beer> fetchAllBeersByBreweryId(int id);
+    List<Beer> fetchAllBeersByBreweryId(int breweryId);
     Beer findBeerById(int beerId);
     Beer findBeerByName(String beerName);
     boolean createBeer(Beer beer);

@@ -9,10 +9,10 @@ const Login = ()=>{
 
 
     const {setToken,setUserName} =useContext(GlobalUpdateContext)
-
     const {userName,token} =useContext(GlobalContext)
     const  [user,setUser]= useState('')
     const  [userPass,setUserPass]= useState('')
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
 
 
     const handleInputChange=(event)=>{
@@ -32,21 +32,30 @@ const Login = ()=>{
         const data = {
      username:user, password:userPass
         }
-
         console.log(data,'datta===')
      const userWithToken= await axios.post(baseUrl+"/login",data)
-     console.log('token====',userWithToken?.data);
+     console.log('token====',userWithToken?.data?.token);
      setToken(userWithToken?.data?.token);
      setUserName(userWithToken?.data?.user?.username)
-     localStorage.setItem('token',JSON.stringify(token));
+     localStorage.setItem('token',JSON.stringify(userWithToken?.data?.token));
      localStorage.setItem('currentUser',JSON.stringify(userName))
+     setIsLoggedIn(true)
+
     }
-    console.log(token,userName,'token====username')
+
+    const logoutHandler =()=>{
+        setIsLoggedIn(false)
+        setUserName('')
+        localStorage.clear()
+
+    }
+
+    console.log(localStorage.getItem('token'),'===getIte')
 
     return   <>
      <div style={{margin:'0 auto',width:'50%'}}>
             <h1 style={{textAlign:'center'}}>{userName}</h1>
-         <form  onSubmit={submitHandler}>
+         <form >
                 <label class="sr-only">Username</label>
                 <input
                     type="text"
@@ -69,7 +78,7 @@ const Login = ()=>{
                     value={userPass}
                     required
                 />
-                <button onClick={submitHandler} style={{margin:'5px'}}>sign in</button>
+                {isLoggedIn?<button onClick={logoutHandler}>log out</button>:<button onClick={submitHandler} style={{margin:'5px'}}>sign in</button>}
 
 
             </form>
