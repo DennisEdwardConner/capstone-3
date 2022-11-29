@@ -83,7 +83,7 @@ const Register = ()=>{
                     <option selected={userRole===""}>--select--</option>
                     <option value='beer lover' selected={userRole==='beer lover'}>Beer Lover</option>
                     <option value={"brewery owner"} selected={userRole==="brewery owner"}>Brewery Owner</option>
-                    <option value={"admin"} selected={userRole==="admin"}>Admin</option>
+                    {/* <option value={"admin"} selected={userRole==="admin"}>Admin</option> */}
                 </select>
                 </div>
 

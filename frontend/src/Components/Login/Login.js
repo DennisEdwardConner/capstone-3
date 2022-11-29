@@ -32,7 +32,7 @@ const Login = ()=>{
         const data = {
      username:user, password:userPass
         }
-        console.log(data,'datta===')
+        console.log(data,'data===')
      const userWithToken= await axios.post(baseUrl+"/login",data)
      console.log('token====',userWithToken?.data?.token);
      setToken(userWithToken?.data?.token);

@@ -1,6 +1,3 @@
-import BreweryObjects from "./BreweryObjects";
-
-
 export default function SqlWriter(breweryDB){
 
     let defaultImagePath = "public/defaultBreweryImg.PNG"

@@ -1,9 +1,9 @@
 import React,{useState, useContext} from 'react';
 import {Switch, Route, Redirect, Link} from 'react-router-dom'
 import {Nav,NavItem,NavLink} from 'reactstrap';
-import Home from "../Home/Home"
-import Login from '../Login/Login'
-import Register from '../Register/Register';
+import Home2 from "../Home/Home2"
+// import Login from '../Login/Login'
+// import Register from '../Register/Register';
 const Main = ()=>{
 
 
@@ -39,9 +39,9 @@ const Main = ()=>{
                     </Nav>
 
                 </header>
-<Register/>
-<Login/>
-<Home/>
+{/* <Register/>
+<Login/> */}
+<Home2 />
 
                 <footer></footer>
             </div> 
