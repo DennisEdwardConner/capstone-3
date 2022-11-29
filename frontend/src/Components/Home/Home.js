@@ -1,12 +1,13 @@
 import React,{useState,useContext} from "react";
-import { Link } from "react-router-dom";
+import {Switch, Route,Router,Redirect, Link} from 'react-router-dom'
 import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
 import { GlobalContext } from "../../context/globalContext";
 import { useEffect } from "react";
 import SqlWriter from "../../Shared/SqlWriter";
 import BeerCard from "../Beer/BeerCard";
-
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 
 
 const Card= ({img,title,id,description})=>{
@@ -52,6 +53,11 @@ const Home = ()=>{
     
 
     return <>
+                <Switch>
+                    <Route path={'/'} exact><Redirect to='login'/></Route>
+                    <Route exact path='/login'><Login/></Route>
+                    <Route path="/register" ><Register/></Route>
+                  </Switch>
     
     <h2>I am from home component </h2>
     <button onClick={getBreweries}>getBreweries</button>

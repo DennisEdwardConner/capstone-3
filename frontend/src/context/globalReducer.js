@@ -17,6 +17,12 @@ export const GlobalReducer= (state,action)=>{
               userName: action.payload
          }   
 
+         case "SET_IS_REGISTER":
+            return{
+                ...state,
+                 userName: action.payload
+            }   
+
          default:
             return state   
     }

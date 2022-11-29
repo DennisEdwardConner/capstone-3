@@ -45,7 +45,7 @@ const Register = ()=>{
     }
 
         return(
-            <div>
+            <div style={{width:'250px',margin:'20px'}}>
                 <h1>Create Account</h1>
                 <label class="sr-only">Username</label>
                 <input

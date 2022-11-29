@@ -10,7 +10,8 @@ const initialState =
     id: "",
     userName:"",
     token:'',
-    authority:[]
+    authority:[],
+    isRegister:false,
     
 }
 
@@ -30,11 +31,17 @@ const GlobalContextProvider =({children})=>{
         dispatch({type:"SET_TOKEN",payload})
     }
 
+    const setIsRegister = payload =>{
+        dispatch({type:"SET_IS_REGISTER",payload})
+    }
+
+
     const actions ={
 
         setUserId ,
         setUserName,
-        setToken
+        setToken,
+        setIsRegister
     }
 
     return (
