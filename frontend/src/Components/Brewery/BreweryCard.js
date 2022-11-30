@@ -7,6 +7,8 @@ export default function BreweryCard(props) {
             <input type='hidden' value={props.card.breweryId} />
             <img className='collection-pic' src={props.card.breweryImg} alt="{props.card.breweryName}" />
             <div>{props.card.description}</div>
+            <div>{props.card.phones}</div>
+            <div>{props.card.address} {props.card.city} {props.card.state} {props.card.zip}</div>
             <div className='collection-button-container'>
                 <div className='edit-button' onClick={() => {props.edit(props.card.breweryId)}}>&#x270D; Edit</div>
                 <div className='delete-button' onClick={() => {props.deleteCard(props.card.breweryId)}}>❌ Delete</div>

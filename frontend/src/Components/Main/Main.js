@@ -1,14 +1,18 @@
 import React,{useState, useContext} from 'react';
-import {Switch, Route, Redirect, Link} from 'react-router-dom'
+import { browserHistory } from 'react-router';
 import {Nav,NavItem,NavLink} from 'reactstrap';
-import Home2 from "../Home/Home2"
-// import Login from '../Login/Login'
-// import Register from '../Register/Register';
+import Home from "../Home/Home"
+import Login from '../Login/Login'
+import Register from '../Register/Register';
+import Footer from '../Structure/Footer';
+import Header from '../Structure/Header';
 const Main = ()=>{
 
+  const  [isRegister,setIsRegister] =useState(false)
 
         return (
-            <div>
+
+                < div className='main'>
                 <header style={{width:'100%'}}>
                     <Nav style={{width:'100%'}} pills>
                       <NavItem>
@@ -37,19 +41,16 @@ const Main = ()=>{
                         </NavLink>
                       </NavItem>
                     </Nav>
-
+<Header />
                 </header>
-{/* <Register/>
-<Login/> */}
-<Home2 />
-
-                <footer></footer>
-            </div> 
-        );
-
-
-
-
+<Register/>
+<Login/>
+<Home />        
+                <footer>
+                  <Footer />
+                </footer>
+                </div>             
+       );
     }
 
 

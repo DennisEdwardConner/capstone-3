@@ -2,6 +2,7 @@ import Main from './Components/Main/Main';
 import GlobalContextProvider from './context/globalContext';
 // import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
+import './App.css'
 // import {ConfigureStore} from './Redux/configureStore'
 
 // const store = ConfigureStore();

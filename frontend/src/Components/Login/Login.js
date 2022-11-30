@@ -53,10 +53,10 @@ const Login = ()=>{
     console.log(localStorage.getItem('token'),'===getIte')
 
     return   <>
-     <div style={{margin:'0 auto',width:'50%'}}>
+     <div style={{width:'250px',margin:'20px'}}>
             <h1 style={{textAlign:'center'}}>{userName}</h1>
          <form >
-                <label class="sr-only">Username</label>
+
                 <input
                     type="text"
                     id="username"
@@ -83,7 +83,7 @@ const Login = ()=>{
 
             </form>
            
-            <Link style={{textAlign:'center'}} to={'/register'}>Don't have account</Link>
+            <Link style={{textAlign:'center'}} to={'/register'}>Create new account</Link>
     </div>
     </>
 

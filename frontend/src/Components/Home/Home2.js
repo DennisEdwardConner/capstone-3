@@ -14,7 +14,7 @@ export default function Home2() {
         onwerId: '',
         breweryImg: '',
         description: '',
-        isActive: false,
+        isActive: true,
         address: '',
         city: '',
         state: '',
@@ -124,32 +124,32 @@ export default function Home2() {
 
 
 
-const api = axios.create({
-    baseUrl: 'http://localhost:8081'
-})
+// const api = axios.create({
+//     baseUrl: 'http://localhost:8081'
+// })
 
-export default class Home2 extends Component {
+// export default class Home2 extends Component {
 
-state = {
-   breweries: []  
-}
+// state = {
+//    breweries: []  
+// }
 
-constructor() {
-    super();
-    api.get('/').then(res => {
-      console.log(res.data)  
-      this.setState({breweries: res.data})
-    })
-}
+// constructor() {
+//     super();
+//     api.get('/').then(res => {
+//       console.log(res.data)  
+//       this.setState({breweries: res.data})
+//     })
+// }
 
-    render() {
-        return (
-            <div>
-                {this.state.breweries.map(brewery => 
-                 <breweryCard />
-                    )}
-            </div>
-        );
-    }
+//     render() {
+//         return (
+//             <div>
+//                 {this.state.breweries.map(brewery => 
+//                  <breweryCard />
+//                     )}
+//             </div>
+//         );
+//     }
 
-}
+// }
