@@ -21,21 +21,12 @@ import Comments from '../Components/Comments';
 
 //     const store = createStore(         
 
-<<<<<<< HEAD
-//         combineReducers({
-//             token: Token,
-//             user: User,
-//             beers: Beers,
-//             comments: Comments,
-//             breweries: Breweries,
-=======
         combineReducers({
             token: Token,
             user: User,
             beerdetail: BeerDetail,
             comments: Comments,
             //brewery: Brewery,
->>>>>>> 1021b14220b529b75f4f25cea2135eea62792a86
             
 //         }),
 //         applyMiddleware( thunk )            

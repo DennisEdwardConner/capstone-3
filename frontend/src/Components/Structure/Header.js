@@ -58,6 +58,11 @@ class Header extends Component{
                                     </NavLink>
                                 </NavItem>
 
+                                  <NavItem>
+                                    <NavLink className="nav-link" onClick="NavigateToNewTab" to="/breweryMap.html">
+                                      <span className="fa fa-map fa-lg" ></span>Brewery Map
+                                    </NavLink>
+                                </NavItem>    
                             </Nav>                        
                         </Collapse>
                     </div>

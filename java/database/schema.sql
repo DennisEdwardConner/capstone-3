@@ -33,16 +33,22 @@ CREATE SEQUENCE seq_brewery_id
   CACHE 1;
 
 CREATE TABLE breweries (
-    brewery_id int DEFAULT nextval('seq_brewery_id'::regclass) NOT NULL,
-    brewery_name varchar(50) NOT NULL,
-    owner_id int NOT NULL,
-    brewery_img varchar(50),
-    description varchar(200),
-    is_active boolean DEFAULT true,
-    address varchar(100)
-    city varchar (50)
-    state varchar (2)
-    zip varchar (10)
+    address character varying(200),
+    description character varying(1000),
+    city character varying(100),
+    country character varying(5),
+    brewery_id integer DEFAULT nextval('public.seq_brewery_id'::regclass) NOT NULL,
+    lat character varying(50),
+    long character varying(50),
+    brewery_name character varying(1000) NOT NULL,
+    phones character varying(200),
+    zip character varying(20),
+    province character varying(50),
+    websites character varying(1000),
+    brewery_img character varying(1000),
+    owner_id integer,
+    is_active boolean DEFAULT true
+);
     CONSTRAINT PK_brewery PRIMARY KEY (brewery_id),
     CONSTRAINT FK_brewery_owner FOREIGN KEY (owner_id) REFERENCES users (user_id)
 );

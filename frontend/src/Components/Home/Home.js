@@ -9,15 +9,11 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 
 
-const Card= ({img,title,id,description})=>{
-    return <div style={{width:'400px',display:'flex',flexDirection:'column'}}>
-        <img style={{width:"400px",height:"300px"}} src={img} alt={id}/>
-        <h5 >{title}</h5>
-         <p >{description}</p>
-    </div>
-}
+
 
 const Home = () => {
+
+
   //brewery list
   const [breweries, setBreweries] = useState([]);
   const [brewery, setBrewery] = useState({});
@@ -50,6 +46,37 @@ const Home = () => {
     setBeers([...res?.data]);
   };
 
+const Card = ({ address, state, city, zip, img, title, id, description }) => {
+  return (
+    <div
+      style={{
+        width: "350px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: "2px 2px ",
+        color: "white",
+        opacity: 0.5,
+        backgroundColor: "#999",
+      }}
+    >
+      {img && (
+        <img style={{ width: "330px", height: "300px" }} src={img} alt={id} />
+      )}
+      <h5>{title}</h5>
+      <p style={{ textAlign: "center" }}>{description}</p>
+      <div>
+        <span>{address}</span>
+        <span>{state}</span>
+      </div>
+      <div>
+        <span>{city}</span>
+        <span>{zip}</span>
+      </div>
+    </div>
+  );
+};
   return (
     <>
       <div style={{ display: "flex", flexGrow: "1" }}>
@@ -105,6 +132,7 @@ const Home = () => {
                   >
                     {item.breweryName}
                   </option>
+                  
                 );
               })}
             </select>
@@ -156,6 +184,7 @@ const Home = () => {
           </div>
         </div>{" "}
       </div>
+      
     </>
     );
               }
