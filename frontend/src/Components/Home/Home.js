@@ -9,7 +9,7 @@ import BeerCard from "../Beer/BeerCard";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 
-const Card = ({ img, title, id, description }) => {
+const Card = ({ address, state, city, zip, img, title, id, description }) => {
   return (
     <div
       style={{
@@ -29,6 +29,14 @@ const Card = ({ img, title, id, description }) => {
       )}
       <h5>{title}</h5>
       <p style={{ textAlign: "center" }}>{description}</p>
+      <div>
+        <span>{address}</span>
+        <span>{state}</span>
+      </div>
+      <div>
+        <span>{city}</span>
+        <span>{zip}</span>
+      </div>
     </div>
   );
 };
@@ -72,7 +80,7 @@ const Home = () => {
         <div
           style={{
             margin: "10px 40px",
-            color: "#ddd",
+            color: "#332B00",
             fontweight: "600",
             display: "flex",
             flexDirection: "column",
@@ -80,10 +88,12 @@ const Home = () => {
             justifyContent: "center",
           }}
         >
-          <h2 style={{ fontSize: "60px" }}>OnTapp</h2>
-          <h5>Your favorite brewery or beer is just a tap away</h5>
+          <h2 className="titleText">OnTapp</h2>
+          <h5 style={{ color: "#aaa", fontSize: "24px" }}>
+            Your favorite brewery or beer is just a tap away
+          </h5>
         </div>
-        <div style={{ width: "320px" }}>
+        <div style={{ width: "320 px" }}>
           <Switch>
             <Route path={"/"} exact>
               <Redirect to="login" />
@@ -97,8 +107,14 @@ const Home = () => {
           </Switch>
         </div>
       </div>
-      <div>
-        <button onClick={getBreweries}>getBreweries</button>
+      <div
+        style={{
+          margin: "20px",
+        }}
+      >
+        <button style={{ margin: "10px" }} onClick={getBreweries}>
+          getBreweries
+        </button>
         <div>
           {breweries?.length !== 0 ? (
             <select>
@@ -128,6 +144,10 @@ const Home = () => {
                 title={brewery?.breweryName}
                 description={brewery?.description}
                 id={brewery?.breweryId}
+                address={brewery?.address}
+                state={brewery?.state}
+                city={brewery?.city}
+                zip={brewery?.zip}
               />
             ) : (
               ""
@@ -136,7 +156,7 @@ const Home = () => {
           <div
             style={{
               margin: "auto",
-              width:'100%',
+              width: "100%",
               display: "flex",
               justifyContent: "center",
               flexWrap: "wrap",

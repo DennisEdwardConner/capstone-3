@@ -104,7 +104,7 @@ const Register = () => {
       <div>
         <Link to="/login">Have an account?</Link>
         <button type="submit" onClick={handleSubmit}>
-          Sign in
+          Register
         </button>
       </div>
     </div>

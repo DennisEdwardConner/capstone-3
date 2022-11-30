@@ -44,6 +44,8 @@ const Login = () => {
   const logoutHandler = () => {
     setIsLoggedIn(false);
     setUserName("");
+    setUser("");
+    setUserPass("");
     localStorage.clear();
   };
 
@@ -51,45 +53,57 @@ const Login = () => {
 
   return (
     <>
-      <div style={{ width: "250px", margin: "20px" }}>
-        <h1 style={{ textAlign: "center" }}>{userName}</h1>
-        <form>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            className="form-control"
-            placeholder="Username"
-            onChange={handleInputChange}
-            required
-            value={user}
-            style={{ marginBottom: "10px" }}
-          />
-          <label class="sr-only">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="form-control"
-            placeholder="Password"
-            onChange={handleInputChange}
-            value={userPass}
-            required
-            style={{ marginBottom: "10px" }}
-          />
-          {isLoggedIn ? (
-            <button onClick={logoutHandler}>log out</button>
-          ) : (
+      {!isLoggedIn ? (
+        <div style={{ width: "250px", margin: "20px" }}>
+          <h1 style={{ textAlign: "center" }}>{userName}</h1>
+          <form>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              className="form-control"
+              placeholder="Username"
+              onChange={handleInputChange}
+              required
+              value={user}
+              style={{ marginBottom: "10px" }}
+            />
+            <label class="sr-only">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="form-control"
+              placeholder="Password"
+              onChange={handleInputChange}
+              value={userPass}
+              required
+              style={{ marginBottom: "10px" }}
+            />
             <button onClick={submitHandler} style={{ margin: "5px" }}>
               sign in
             </button>
-          )}
-        </form>
+          </form>
 
-        <Link style={{ textAlign: "center" }} to={"/register"}>
-          Create new account
-        </Link>
-      </div>
+          <Link style={{ textAlign: "center" }} to={"/register"}>
+            Create new account
+          </Link>
+        </div>
+      ) : (
+        <div
+          style={{
+            color: "#fff",
+            display: "flex",
+            gap: "20px",
+            marginRight: "20px",
+          }}
+        >
+          <h4>Hello {userName}</h4>
+          <button onClick={logoutHandler} style={{ margin: "5px" }}>
+            Log Out
+          </button>
+        </div>
+      )}
     </>
   );
 };
