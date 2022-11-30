@@ -7,3 +7,17 @@
   background-repeat: no-repeat;
   
 }
+
+.form-control{
+  margin-bottom: 10px;
+}
+
+.titleText{
+  font-size: 60px;
+  font-weight: 600;
+    color: transparent;
+    background-image: linear-gradient(to right,#727e79,#868d3a);
+    -webkit-background-clip: text;
+    text-shadow: "2px 3px 5px #fff "
+
+}
