@@ -21,3 +21,11 @@
     text-shadow: "2px 3px 5px #fff "
 
 }
+.nav-link{
+  font-size: 24px;
+  color: #ccc;
+  padding: 10px;
+}
+.nav-link:hover{
+  color: #727e79;
+}

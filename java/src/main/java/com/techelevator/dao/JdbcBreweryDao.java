@@ -81,12 +81,17 @@ public class JdbcBreweryDao implements BreweryDao {
         String breweryImg = brewery.getBreweryImg();
         String description = brewery.getDescription();
         boolean isActive = brewery.getIsActive();
+        String address = brewery.getAddress();
+        String city = brewery.getCity();
+        String state = brewery.getState();
+        String zip = brewery.getZip();
+
 
         try {
             String sql = "INSERT into breweries " +
-                    "(brewery_name, owner_id, brewery_img, description, isActive) " +
-                    "VALUES( ?, ?, ?, ?, ?); ";
-            jdbcTemplate.update(sql, breweryName, ownerId, breweryImg, description, isActive);
+                    "(brewery_name, owner_id, brewery_img, description, isActive, address, city, state, zip) " +
+                    "VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+            jdbcTemplate.update(sql, breweryName, ownerId, breweryImg, description, isActive, address, city, state, zip);
             return true;
         }
         catch(DataAccessException e) {
@@ -122,11 +127,16 @@ public class JdbcBreweryDao implements BreweryDao {
         String breweryImg = brewery.getBreweryImg();
         String description = brewery.getDescription();
         boolean isActive = brewery.getIsActive();
+        String address = brewery.getAddress();
+        String city = brewery.getCity();
+        String state = brewery.getState();
+        String zip = brewery.getZip();
 
         String sql = "UPDATE breweries SET brewery_name = ?, owner_id = ?, brewery_img = ?, description = ?, isActive = ? " +
+                "address = ?, city = ?, state = ?, zip = ?" +
                 "WHERE brewery_id = ?; ";
         try {
-            jdbcTemplate.update(sql,breweryName, ownerId, breweryImg, description, isActive, breweryId);
+            jdbcTemplate.update(sql,breweryName, ownerId, breweryImg, description, isActive, breweryId, address, city, state, zip);
             return true;
         }
         catch (DataAccessException e) {
@@ -144,6 +154,10 @@ public class JdbcBreweryDao implements BreweryDao {
         brewery.setBreweryImg(rs.getString("brewery_img"));
         brewery.setDescription(rs.getString("description"));
         brewery.setActive(rs.getBoolean("is_active"));
+        brewery.setAddress(rs.getString("address"));
+        brewery.setCity(rs.getString("city"));
+        brewery.setState(rs.getString("state"));
+        brewery.setZip(rs.getString("zip"));
 
         return brewery;
     }

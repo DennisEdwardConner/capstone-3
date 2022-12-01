@@ -4,47 +4,10 @@ import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
 import { GlobalContext } from "../../context/globalContext";
 import { useEffect } from "react";
+import SqlWriter from "../../Shared/SqlWriter";
 import BeerCard from "../Beer/BeerCard";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-
-
-
-
-const Home = () => {
-
-
-  //brewery list
-  const [breweries, setBreweries] = useState([]);
-  const [brewery, setBrewery] = useState({});
-  const [beers, setBeers] = useState([]);
-  //token from the context
-  const { token } = useContext(GlobalContext);
-  //passing token as header inside the getbrewery/all request and got the data
-  const getBreweries = async () => {
-    // const res = await axios.get(baseUrl+'/brewery/all',{
-    // 	headers: {
-    // 		'x-access-token':localStorage.getItem('token'),
-    // 	},
-    // }
-    // )
-    const res = await axios.get(baseUrl + "/brewery/all", {
-      headers: { "x-access-token": localStorage.getItem("token") },
-    });
-    // res.then((data)=> {console.log(data);}).catch((err)=>{console.log(err,'===err');})
-    //set the data to brewery list
-    setBreweries(res?.data);
-    console.log(res, "=res====");
-    // console.log(res.data,'=res====');
-  };
-
-  const breweryListShow = async (breweryId) => {
-    const res = await axios.get(baseUrl + "/beers/brewery/" + breweryId, {
-      headers: { "x-access-token": localStorage.getItem("token") },
-    });
-    console.log("res========", res?.data);
-    setBeers([...res?.data]);
-  };
 
 const Card = ({ address, state, city, zip, img, title, id, description }) => {
   return (
@@ -66,17 +29,65 @@ const Card = ({ address, state, city, zip, img, title, id, description }) => {
       )}
       <h5>{title}</h5>
       <p style={{ textAlign: "center" }}>{description}</p>
-      <div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          gap: "10px",
+          justifyContent: "center",
+        }}
+      >
         <span>{address}</span>
         <span>{state}</span>
       </div>
-      <div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          gap: "10px",
+          justifyContent: "center",
+        }}
+      >
         <span>{city}</span>
         <span>{zip}</span>
       </div>
     </div>
   );
 };
+
+const Home = () => {
+  //brewery list
+  const [breweries, setBreweries] = useState([]);
+  const [brewery, setBrewery] = useState({});
+  const [beers, setBeers] = useState([]);
+  //token from the context
+  const { token } = useContext(GlobalContext);
+  //passing token as header inside the getbrewery/all request and got the data
+  const getBreweries = async () => {
+    // const res = await axios.get(baseUrl+'/brewery/all',{
+    // 	headers: {
+    // 		'x-access-token':localStorage.getItem('token'),
+    // 	},
+    // }
+    // )
+    const res = await axios.get(baseUrl + "/brewery/all", {
+      headers: { "x-access-token": token },
+    });
+    // res.then((data)=> {console.log(data);}).catch((err)=>{console.log(err,'===err');})
+    //set the data to brewery list
+    setBreweries(res?.data);
+    console.log(res, "=res====");
+    // console.log(res.data,'=res====');
+  };
+
+  const breweryListShow = async (breweryId) => {
+    const res = await axios.get(baseUrl + "/beers/brewery/" + breweryId, {
+      headers: { "x-access-token": token },
+    });
+    console.log("res========", res?.data);
+    setBeers([...res?.data]);
+  };
+
   return (
     <>
       <div style={{ display: "flex", flexGrow: "1" }}>
@@ -107,6 +118,9 @@ const Card = ({ address, state, city, zip, img, title, id, description }) => {
             <Route path="/register">
               <Register />
             </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
           </Switch>
         </div>
       </div>
@@ -116,7 +130,7 @@ const Card = ({ address, state, city, zip, img, title, id, description }) => {
         }}
       >
         <button style={{ margin: "10px" }} onClick={getBreweries}>
-          getBreweries
+          Breweries
         </button>
         <div>
           {breweries?.length !== 0 ? (
@@ -132,7 +146,6 @@ const Card = ({ address, state, city, zip, img, title, id, description }) => {
                   >
                     {item.breweryName}
                   </option>
-                  
                 );
               })}
             </select>
@@ -184,10 +197,8 @@ const Card = ({ address, state, city, zip, img, title, id, description }) => {
           </div>
         </div>{" "}
       </div>
-      
     </>
-    );
-              }
-
+  );
+};
 
 export default Home;
